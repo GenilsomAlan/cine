@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 
     const movies = [
-        { title: "X-Men Apocalipse", linkIncorporated: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/FcTCY_t7l1c?si=ogPpAVq67mvJmWmK&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'},
+        { title: "X-Men Apocalipse", linkIncorporated: '<iframe width="100%" min-height="720px" src="https://www.youtube.com/embed/FcTCY_t7l1c?si=ogPpAVq67mvJmWmK&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'},
         { title: "Movimento de Jesus", linkIncorporated: ''}
     ];
 
