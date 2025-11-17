@@ -1,0 +1,112 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ESTILIZAÇÃO DO CORPO */
+body {
+    background-color: #141414; /* Fundo escuro, típico de cinema/streaming */
+    color: #e5e5e5; /* Texto claro */
+    line-height: 1.6;
+    padding-bottom: 50px; /* Espaço na parte inferior */
+}
+
+/* CABEÇALHO */
+header {
+    background-color: #e50914; /* Cor vibrante, como o vermelho da Netflix */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* CONTEÚDO PRINCIPAL */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+main h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-left: 5px solid #e50914;
+    padding-left: 10px;
+}
+
+/* CONTAINER DA LISTA DE FILMES / PLAYER */
+.listMovies {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    min-height: 350px; /* Altura mínima para visualização */
+}
+
+/* LISTA DE FILMES (UL) */
+.list {
+    list-style: none; /* Remove marcadores */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ITEM DA LISTA (LI) */
+.list li {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-left: 5px solid transparent;
+}
+
+.list li:hover {
+    background-color: #444;
+    border-left: 5px solid #e50914; /* Destaque na seleção */
+    transform: translateX(5px);
+}
+
+/* ESTILIZAÇÃO RESPONSIVA DO IFRAME (Player de Vídeo) */
+.listMovies iframe {
+    /* Ocupa a largura total do contêiner */
+    width: 100%; 
+    /* Define uma proporção de 16:9 (altura é 56.25% da largura) */
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 5px;
+}
+
+/* MENSAGEM de "Sem link disponível" */
+.listMovies:has(> p) { 
+    text-align: center;
+    font-size: 1.5em;
+    padding: 50px;
+    color: #999;
+}
+
+
+/* MEDIA QUERIES para telas menores (Responsividade) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    main h2 {
+        font-size: 1.5em;
+    }
+
+    .list li {
+        font-size: 1em;
+    }
+}
