@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 
     const movies = [
-        { title: "X-Men Apocalipse", linkIncorporated: '<iframe src="https://drive.google.com/file/d/1CsQMcgZ_seDelgFAtz5bwwvLm5q8Hfoh/preview" width="640" height="480" allow="autoplay"></iframe>'},
+        { title: "X-Men Apocalipse", linkIncorporated: '<iframe src="https://drive.google.com/file/d/1BgM4Gg-3l96IaOobrMh5RH5M595vp6ww/preview" width="640" height="480" allow="autoplay"></iframe>'},
         { title: "Movimento de Jesus", linkIncorporated: ''}
     ];
-    
+
 
     const lista = document.querySelector('.list');
 
