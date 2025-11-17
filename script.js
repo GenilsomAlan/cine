@@ -29,34 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         clearHtml();
         movieListContainer.innerHTML = movies[index].linkIncorporated || 'Sem link disponível';
-
-        Object.assign(movieListContainer.computedStyleMap,{
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            width: '100vw',
-            height: '100vh',
-            zIndex: '9999',
-            background: '#000'
-        });
-
-        const el = movieListContainer;
-        if (el.requestFullscreen) {
-            el.requestFullscreen().catch(()=>{/* usuário pode negar */});
-        } else if (el.webkitRequestFullscreen) {
-            el.webkitRequestFullscreen();
-        } else if (el.mozRequestFullScreen) {
-            el.mozRequestFullScreen();
-        } else if (el.msRequestFullscreen) {
-            el.msRequestFullscreen();
-        }
-
     }
 
     function clearHtml() {
         movieListContainer.innerHTML = '';
     }
    
-    
-        
 });
