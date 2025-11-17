@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { title: "X-Men Apocalipse", linkIncorporated: '<iframe src="https://drive.google.com/file/d/1CsQMcgZ_seDelgFAtz5bwwvLm5q8Hfoh/preview" width="640" height="480" allow="autoplay"></iframe>'},
         { title: "Movimento de Jesus", linkIncorporated: ''}
     ];
+    
 
     const lista = document.querySelector('.list');
 
