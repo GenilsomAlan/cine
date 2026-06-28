@@ -70,15 +70,15 @@ class Player {
         this.y = 0;
         this.z = 0; // Profundidade
         this.speed = 0;
-        this.maxSpeed = 280;
-        this.acceleration = 0.5;
-        this.braking = 1.2;
-        this.friction = 0.98;
-        this.turnSpeed = 0.04;
+        this.maxSpeed = 450;
+        this.acceleration = 1.2;
+        this.braking = 1.8;
+        this.friction = 0.97;
+        this.turnSpeed = 0.05;
         this.angle = 0;
         this.nitro = 100;
         this.nitroActive = false;
-        this.nitroMultiplier = 1.8;
+        this.nitroMultiplier = 2.2;
         this.lap = 1;
         this.totalLaps = 3;
         this.lapTime = 0;
@@ -142,7 +142,7 @@ class Player {
 
     updatePosition() {
         // Movimento baseado no ângulo e velocidade
-        const moveSpeed = this.speed * 0.1;
+        const moveSpeed = this.speed * 0.15;
         this.x += Math.sin(this.angle) * moveSpeed;
         this.z += Math.cos(this.angle) * moveSpeed;
 
@@ -158,7 +158,7 @@ class Player {
         }
 
         // Sistema de voltas
-        const trackLength = 10000;
+        const trackLength = 15000;
         if (this.z > trackLength) {
             this.z -= trackLength;
             this.completeLap();
@@ -199,7 +199,7 @@ class Opponent {
         this.x = startX;
         this.z = 0;
         this.speed = 0;
-        this.maxSpeed = 200 + skill * 20;
+        this.maxSpeed = 320 + skill * 15;
         this.angle = 0;
         this.color = color;
         this.skill = skill;
@@ -213,9 +213,9 @@ class Opponent {
         }
 
         // IA simples
-        const targetSpeed = this.maxSpeed * (0.8 + Math.random() * 0.2);
+        const targetSpeed = this.maxSpeed * (0.85 + Math.random() * 0.15);
         if (this.speed < targetSpeed) {
-            this.speed += 0.3;
+            this.speed += 0.5;
         }
 
         // Seguir a pista com alguma variação
@@ -238,7 +238,7 @@ class Opponent {
         }
 
         // Atualizar posição
-        const moveSpeed = this.speed * 0.1;
+        const moveSpeed = this.speed * 0.15;
         this.x += Math.sin(this.angle) * moveSpeed;
         this.z += Math.cos(this.angle) * moveSpeed;
 
@@ -254,7 +254,7 @@ class Opponent {
         }
 
         // Voltas
-        const trackLength = 10000;
+        const trackLength = 15000;
         if (this.z > trackLength) {
             this.z -= trackLength;
             this.lap = (this.lap || 1) + 1;
