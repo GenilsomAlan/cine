@@ -3,110 +3,329 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Courier New', monospace;
 }
 
-/* ESTILIZAÇÃO DO CORPO */
+/* ESTILIZAÇÃO DO CORPO - Estilo DOOM */
 body {
-    background-color: #141414; /* Fundo escuro, típico de cinema/streaming */
-    color: #e5e5e5; /* Texto claro */
-    line-height: 1.6;
-    padding-bottom: 50px; /* Espaço na parte inferior */
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1f1f 50%, #1a0a0a 100%);
+    color: #c8b8a8;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
-/* CABEÇALHO */
-header {
-    background-color: #e50914; /* Cor vibrante, como o vermelho da Netflix */
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-header h1 {
-    font-size: 2.5em;
-    color: #ffffff;
-    letter-spacing: 2px;
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
-/* CONTEÚDO PRINCIPAL */
-main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
+/* HUD - Heads Up Display estilo retro */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
 }
 
-main h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    border-left: 5px solid #e50914;
-    padding-left: 10px;
-}
-
-/* CONTAINER DA LISTA DE FILMES / PLAYER */
-.listMovies {
-    background-color: #1f1f1f;
+#speedometer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, rgba(60, 20, 20, 0.9), rgba(30, 10, 10, 0.9));
+    border: 3px solid #8b0000;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    min-height: 350px; /* Altura mínima para visualização */
-}
-
-/* LISTA DE FILMES (UL) */
-.list {
-    list-style: none; /* Remove marcadores */
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* ITEM DA LISTA (LI) */
-.list li {
-    background-color: #333;
-    padding: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-left: 5px solid transparent;
-}
-
-.list li:hover {
-    background-color: #444;
-    border-left: 5px solid #e50914; /* Destaque na seleção */
-    transform: translateX(5px);
-}
-
-/* ESTILIZAÇÃO RESPONSIVA DO IFRAME (Player de Vídeo) */
-.listMovies iframe {
-    /* Ocupa a largura total do contêiner */
-    width: 100%; 
-    /* Define uma proporção de 16:9 (altura é 56.25% da largura) */
-    aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 5px;
-}
-
-/* MENSAGEM de "Sem link disponível" */
-.listMovies:has(> p) { 
     text-align: center;
-    font-size: 1.5em;
-    padding: 50px;
-    color: #999;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.8);
+    min-width: 150px;
 }
 
+#speed-value {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    letter-spacing: 3px;
+}
 
-/* MEDIA QUERIES para telas menores (Responsividade) */
+#speed-label {
+    font-size: 0.9em;
+    color: #c8b8a8;
+    margin-top: 5px;
+}
+
+#nitro-bar {
+    width: 100%;
+    height: 20px;
+    background: #2a0a0a;
+    border: 2px solid #8b0000;
+    border-radius: 5px;
+    margin-top: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+#nitro-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #0066ff, #00ccff, #00ffff);
+    box-shadow: 0 0 10px #00ccff;
+    transition: width 0.1s;
+}
+
+#nitro-text {
+    font-size: 0.8em;
+    color: #00ccff;
+    margin-top: 5px;
+    text-shadow: 0 0 5px #00ccff;
+}
+
+#lap-info {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(60, 20, 20, 0.9), rgba(30, 10, 10, 0.9));
+    border: 3px solid #8b0000;
+    border-radius: 10px;
+    padding: 15px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+}
+
+#current-lap {
+    font-size: 1.2em;
+    color: #ffaa00;
+    margin-bottom: 5px;
+}
+
+#lap-time {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff4444;
+}
+
+#best-lap {
+    font-size: 0.9em;
+    color: #c8b8a8;
+    margin-top: 5px;
+}
+
+#position {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, rgba(60, 20, 20, 0.9), rgba(30, 10, 10, 0.9));
+    border: 3px solid #8b0000;
+    border-radius: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+}
+
+#pos-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+#pos-label {
+    font-size: 0.8em;
+    color: #c8b8a8;
+}
+
+/* MENUS - Estilo DOOM */
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1f1f 50%, #1a0a0a 100%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.menu.active {
+    display: flex;
+}
+
+.doom-title {
+    font-size: 4em;
+    color: #ff4444;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff0000,
+        0 0 40px #ff0000,
+        3px 3px 0 #8b0000,
+        6px 6px 0 #4a0000;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 30px #ff0000,
+            0 0 40px #ff0000,
+            3px 3px 0 #8b0000,
+            6px 6px 0 #4a0000;
+    }
+    50% {
+        text-shadow: 
+            0 0 20px #ff0000,
+            0 0 30px #ff0000,
+            0 0 40px #ff0000,
+            0 0 50px #ff0000,
+            3px 3px 0 #8b0000,
+            6px 6px 0 #4a0000;
+    }
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #c8b8a8;
+    margin-bottom: 40px;
+    letter-spacing: 5px;
+}
+
+.menu h2 {
+    font-size: 3em;
+    color: #ff4444;
+    text-shadow: 0 0 20px #ff0000;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.doom-btn {
+    background: linear-gradient(135deg, #8b0000, #4a0000);
+    color: #ffffff;
+    border: 3px solid #ff4444;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.doom-btn:hover {
+    background: linear-gradient(135deg, #ff4444, #8b0000);
+    box-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+    transform: scale(1.05);
+}
+
+.doom-btn:active {
+    transform: scale(0.98);
+}
+
+.controls-info {
+    margin-top: 40px;
+    background: rgba(60, 20, 20, 0.8);
+    border: 2px solid #8b0000;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.controls-info p {
+    color: #c8b8a8;
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+#final-stats {
+    background: rgba(60, 20, 20, 0.8);
+    border: 2px solid #8b0000;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+#final-stats p {
+    color: #c8b8a8;
+    margin: 15px 0;
+    font-size: 1.2em;
+}
+
+#final-stats span {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+/* Efeito de scanline estilo retro */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    header h1 {
+    .doom-title {
+        font-size: 2em;
+        letter-spacing: 5px;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+    
+    #speed-value {
         font-size: 2em;
     }
-
-    main h2 {
+    
+    #lap-time {
         font-size: 1.5em;
     }
-
-    .list li {
+    
+    .menu h2 {
+        font-size: 2em;
+    }
+    
+    .doom-btn {
+        padding: 12px 30px;
         font-size: 1em;
     }
 }
