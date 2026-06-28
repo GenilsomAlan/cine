@@ -1,21 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+    <title>Nitro Doom Racing</title>
     <link rel="stylesheet" href="style.css">
-    <title>CINE</title>
 </head>
 <body>
-    <header>
-        <h1>Welcome to CINE</h1>
-    </header>
-    <main>
-        <h2>Lista de Filmes disponiveis:</h2>
-        <div class="listMovies">
-            <!-- Movie items will be dynamically inserted here -->
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- HUD -->
+        <div id="hud">
+            <div id="speedometer">
+                <div id="speed-value">0</div>
+                <div id="speed-label">KM/H</div>
+                <div id="nitro-bar">
+                    <div id="nitro-fill"></div>
+                </div>
+                <div id="nitro-text">NITRO</div>
+            </div>
+            
+            <div id="lap-info">
+                <div id="current-lap">VOLTA 1/3</div>
+                <div id="lap-time">00:00.00</div>
+                <div id="best-lap">MELHOR: --:--.--</div>
+            </div>
+            
+            <div id="position">
+                <div id="pos-value">1º</div>
+                <div id="pos-label">POSIÇÃO</div>
+            </div>
         </div>
-    </main>
+        
+        <!-- Menus -->
+        <div id="start-menu" class="menu active">
+            <h1 class="doom-title">NITRO DOOM RACING</h1>
+            <p class="subtitle">Corrida Extrema</p>
+            <button id="start-btn" class="doom-btn">INICIAR CORRIDA</button>
+            <div class="controls-info">
+                <p>⬆️ W / Setima Cima - Acelerar</p>
+                <p>⬇️ S / Seta Baixo - Frear</p>
+                <p>⬅️➡️ A D / Setas - Virar</p>
+                <p>ESPAÇO / SHIFT - Nitro</p>
+            </div>
+        </div>
+        
+        <div id="pause-menu" class="menu">
+            <h2>PAUSADO</h2>
+            <button id="resume-btn" class="doom-btn">CONTINUAR</button>
+            <button id="restart-btn" class="doom-btn">REINICIAR</button>
+        </div>
+        
+        <div id="gameover-menu" class="menu">
+            <h2 id="race-result">CORRIDA FINALIZADA!</h2>
+            <div id="final-stats">
+                <p>Tempo Total: <span id="total-time">00:00.00</span></p>
+                <p>Melhor Volta: <span id="final-best-lap">--:--.--</span></p>
+                <p>Posição Final: <span id="final-position">1º</span></p>
+            </div>
+            <button id="play-again-btn" class="doom-btn">JOGAR NOVAMENTE</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
